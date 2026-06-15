@@ -213,7 +213,8 @@ export default function App() {
     } catch (e) {
       if (e.name !== 'AbortError') {
         console.error(`Worker failed on page ${pageNum}`, e);
-        setTranslatedPages(prev => ({ ...prev, [pageNum]: { ...(prev[pageNum] || {}), status: 'error' } }));
+        const errMsg = e.message || String(e);
+        setTranslatedPages(prev => ({ ...prev, [pageNum]: { ...(prev[pageNum] || {}), status: 'error', error: errMsg } }));
       }
     } finally {
       activeWorkersCountRef.current -= 1;

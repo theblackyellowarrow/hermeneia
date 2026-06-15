@@ -84,8 +84,11 @@ export default function TranslationViewer({
               <div className="h-full py-12 flex flex-col items-center justify-center text-slate-400 space-y-4 font-mono">
                 <AlertCircle className="h-10 w-10 text-rose-500" />
                 <div className="text-center animate-fadeIn">
-                  <p className="text-xs text-rose-400 font-bold uppercase tracking-wider">Payload Truncated on Page {currentPageIndex}</p>
-                  <p className="text-[11px] text-neutral-500 mt-1 max-w-xs leading-normal font-sans font-medium">Standard rate limits might have restricted this batch. Click manual override index below to resolve.</p>
+                  <p className="text-xs text-rose-400 font-bold uppercase tracking-wider">Translation Failed — Page {currentPageIndex}</p>
+                  {activePageData?.error && (
+                    <p className="text-[10px] text-rose-300 mt-1 max-w-xs leading-normal font-mono break-all">{activePageData.error}</p>
+                  )}
+                  <p className="text-[11px] text-neutral-500 mt-1 max-w-xs leading-normal font-sans font-medium">Click retry below to attempt the page again.</p>
                 </div>
                 <button
                   onClick={() => onRetryPage(currentPageIndex)}
