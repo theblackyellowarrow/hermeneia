@@ -23,7 +23,14 @@ async function translateSource(sourceText, direction, profile, customGlossary, a
   let raw;
   try {
     raw = await openaiChat(messages, { apiKey: apiKeys.openai, model: 'gpt-4o-mini', temperature: 0.1, signal });
-  } catch {
+    if (raw && raw.toLowerCase().includes("i'm sorry") && raw.toLowerCase().includes("can't assist")) {
+      raw = null;
+    }
+  } catch (e) {
+    console.warn('mini failed, trying gpt-4o', e.message);
+  }
+
+  if (!raw) {
     raw = await openaiChat(messages, { apiKey: apiKeys.openai, model: 'gpt-4o', temperature: 0.1, signal });
   }
 
