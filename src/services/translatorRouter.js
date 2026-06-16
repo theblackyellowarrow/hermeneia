@@ -20,7 +20,7 @@ async function translateWithOpenAI(sourceText, direction, profile, customGlossar
     { role: 'user', content: `Translate the following text according to the system instructions:\n\n${sourceText}` },
   ];
 
-  const raw = await openaiChat(messages, { apiKey, model: 'gpt-4o', temperature: 0.1, signal });
+  const raw = await openaiChat(messages, { apiKey, model: 'gpt-4o-mini', temperature: 0.1, signal });
   if (!raw) throw new Error('OpenAI translation returned empty result.');
 
   return cleanAndParse(raw);
