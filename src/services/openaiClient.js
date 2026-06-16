@@ -143,7 +143,7 @@ Rules:
                     meaning: { type: 'string' },
                     grammar: { type: 'string' },
                   },
-                  required: ['word', 'meaning'],
+                   required: ['word', 'meaning', 'grammar'],
                   additionalProperties: false,
                 },
               },
