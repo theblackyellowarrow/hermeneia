@@ -90,7 +90,7 @@ export async function openaiOcr(imageBase64, apiKey, signal) {
         ],
       },
     ],
-    { apiKey, model: 'gpt-4o', temperature: 0, signal }
+    { apiKey, model: 'gpt-4o-mini', temperature: 0, signal }
   );
 
   return text;

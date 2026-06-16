@@ -154,7 +154,12 @@ export default function DocumentSourcePanel({
               </div>
 
               <div className="flex justify-between items-center text-xs bg-black p-3 rounded-none border border-neutral-900 font-sans">
-                <span className="text-neutral-500 font-bold uppercase tracking-wider">OCR Scan:</span>
+                <div>
+                  <span className="text-neutral-500 font-bold uppercase tracking-wider">OCR Scan:</span>
+                  {ocrMode === 'force_ocr' && (
+                    <span className="text-rose-400 text-[10px] ml-2 font-bold uppercase">Costly per page</span>
+                  )}
+                </div>
                 <div className="flex bg-neutral-900 p-0.5 rounded-none border border-neutral-800">
                   <button
                     onClick={() => onOcrModeChange('auto')}
