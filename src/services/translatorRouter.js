@@ -10,7 +10,7 @@ function cleanAndParse(raw) {
   return JSON.parse(text);
 }
 
-async function translateWithOpenAI(sourceText, direction, profile, customGlossary, apiKey, signal) {
+async function translateSource(sourceText, direction, profile, customGlossary, apiKeys, signal) {
   const sourceLang = direction === 'RU_TO_EN' ? 'Russian' : 'English';
   const targetLang = direction === 'RU_TO_EN' ? 'English' : 'Russian';
   const systemPrompt = buildSystemPrompt(sourceLang, targetLang, profile, customGlossary);
@@ -20,9 +20,14 @@ async function translateWithOpenAI(sourceText, direction, profile, customGlossar
     { role: 'user', content: `Translate the following text according to the system instructions:\n\n${sourceText}` },
   ];
 
-  const raw = await openaiChat(messages, { apiKey, model: 'gpt-4o-mini', temperature: 0.1, signal });
-  if (!raw) throw new Error('OpenAI translation returned empty result.');
+  let raw;
+  try {
+    raw = await openaiChat(messages, { apiKey: apiKeys.openai, model: 'gpt-4o-mini', temperature: 0.1, signal });
+  } catch {
+    raw = await openaiChat(messages, { apiKey: apiKeys.openai, model: 'gpt-4o', temperature: 0.1, signal });
+  }
 
+  if (!raw) throw new Error('Translation returned empty result.');
   return cleanAndParse(raw);
 }
 
@@ -35,9 +40,9 @@ export async function translatePage({ pageData, direction, profile, customGlossa
     sourceText = pageData.content;
   }
 
-  return translateWithOpenAI(sourceText, direction, profile, customGlossary, apiKeys.openai, signal);
+  return translateSource(sourceText, direction, profile, customGlossary, apiKeys, signal);
 }
 
 export async function translateText({ sourceText, direction, profile, customGlossary, apiKeys, signal }) {
-  return translateWithOpenAI(sourceText, direction, profile, customGlossary, apiKeys.openai, signal);
+  return translateSource(sourceText, direction, profile, customGlossary, apiKeys, signal);
 }
