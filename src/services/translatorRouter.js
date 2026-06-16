@@ -1,5 +1,4 @@
-import { openaiOcr } from './openaiClient';
-import { deepseekTranslate } from './deepseekClient';
+import { openaiOcr, openaiChat } from './openaiClient';
 import { buildSystemPrompt } from './promptBuilder';
 
 function cleanAndParse(raw) {
@@ -11,13 +10,18 @@ function cleanAndParse(raw) {
   return JSON.parse(text);
 }
 
-async function translateRoute(sourceText, direction, profile, customGlossary, apiKeys, signal) {
+async function translateWithOpenAI(sourceText, direction, profile, customGlossary, apiKey, signal) {
   const sourceLang = direction === 'RU_TO_EN' ? 'Russian' : 'English';
   const targetLang = direction === 'RU_TO_EN' ? 'English' : 'Russian';
   const systemPrompt = buildSystemPrompt(sourceLang, targetLang, profile, customGlossary);
 
-  const raw = await deepseekTranslate(sourceText, systemPrompt, apiKeys.deepseek, signal);
-  if (!raw) throw new Error('DeepSeek translation returned empty result.');
+  const messages = [
+    { role: 'system', content: systemPrompt },
+    { role: 'user', content: `Translate the following text according to the system instructions:\n\n${sourceText}` },
+  ];
+
+  const raw = await openaiChat(messages, { apiKey, model: 'gpt-4o', temperature: 0.1, signal });
+  if (!raw) throw new Error('OpenAI translation returned empty result.');
 
   return cleanAndParse(raw);
 }
@@ -31,9 +35,9 @@ export async function translatePage({ pageData, direction, profile, customGlossa
     sourceText = pageData.content;
   }
 
-  return translateRoute(sourceText, direction, profile, customGlossary, apiKeys, signal);
+  return translateWithOpenAI(sourceText, direction, profile, customGlossary, apiKeys.openai, signal);
 }
 
 export async function translateText({ sourceText, direction, profile, customGlossary, apiKeys, signal }) {
-  return translateRoute(sourceText, direction, profile, customGlossary, apiKeys, signal);
+  return translateWithOpenAI(sourceText, direction, profile, customGlossary, apiKeys.openai, signal);
 }
