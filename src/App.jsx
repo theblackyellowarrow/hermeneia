@@ -8,18 +8,15 @@ import WorkspaceTabs from './components/WorkspaceTabs';
 import GlossaryPanel from './components/GlossaryPanel';
 import HistorySidebar from './components/HistorySidebar';
 import ExportModal from './components/ExportModal';
+import ApiKeyPanel from './components/ApiKeyPanel';
 import { useDocumentSource, useDragDrop } from './hooks/useDocumentSource';
 import { useAnnotations } from './hooks/useAnnotations';
+import { useApiKeys } from './hooks/useApiKeys';
 import { translatePage, translateText } from './services/translatorRouter';
 import { getPageSourceData as parsePage } from './services/documentParser';
 import { generatePlaintextReport, generatePrintHTML } from './services/exportService';
 import { copyToClipboard, speakText } from './utils/helpers';
 import { HISTORY_STORAGE_KEY, DEFAULT_GLOSSARY } from './utils/constants';
-
-const apiKeys = {
-  openai: import.meta.env.VITE_OPENAI_API_KEY || '',
-  deepseek: import.meta.env.VITE_DEEPSEEK_API_KEY || '',
-};
 
 export default function App() {
   const [inputMode, setInputMode] = useState('document');
@@ -71,6 +68,12 @@ export default function App() {
     newAnnotation, setNewAnnotation, addAnnotation: addAnnot,
     removeAnnotation, filteredAnnotations,
   } = useAnnotations();
+
+  const {
+    apiKeys, needsKey, showKeyPanel, setShowKeyPanel,
+    userOpenaiKey, saveUserKey, clearUserKey, incrementUsage,
+    freeRemaining, isFreeTier, hasUserKey, usageCount, FREE_LIMIT,
+  } = useApiKeys();
 
   useEffect(() => {
     try {
@@ -243,6 +246,7 @@ export default function App() {
 
       setTranslatedPages(prev => ({ ...prev, [pageNum]: { ...parsed, status: 'completed' } }));
       setCurrentPageIndex(pageNum);
+      incrementUsage();
     } catch (err) {
       if (err.name === 'AbortError') {
         console.log(`Page ${pageNum} translation aborted.`);
@@ -269,6 +273,7 @@ export default function App() {
       setTranslatedPages({ 1: { ...parsed, status: 'completed' } });
       setTotalPages(1);
       setCurrentPageIndex(1);
+      incrementUsage();
     } catch (err) {
       console.error(err);
       setError('Manual text translation failed. Verify spelling or connectivity.');
@@ -367,6 +372,30 @@ export default function App() {
         onModeChange={(mode) => { setInputMode(mode); clearCurrentWorkspace(); setError(null); }}
         onToggleHistory={() => setShowHistory(!showHistory)}
       />
+
+      <div className="bg-neutral-950 border-b border-neutral-900">
+        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between text-[10px] font-mono">
+          <div className="flex items-center gap-3">
+            <span className="text-neutral-500 uppercase tracking-wider">
+              {isFreeTier ? `${freeRemaining} free pages left` : hasUserKey ? 'Your OpenAI key active' : 'Free tier exhausted'}
+            </span>
+            <span className="text-neutral-700">|</span>
+            <span className="text-emerald-500 flex items-center gap-1">
+              <span className="h-1.5 w-1.5 bg-emerald-500" />
+              DeepSeek free
+            </span>
+            <span className="text-neutral-700">|</span>
+            <span className={`flex items-center gap-1 ${needsKey ? 'text-rose-500' : hasUserKey ? 'text-emerald-500' : 'text-yellow-400'}`}>
+              <span className={`h-1.5 w-1.5 ${needsKey ? 'bg-rose-500' : hasUserKey ? 'bg-emerald-500' : 'bg-yellow-400'}`} />
+              OpenAI {needsKey ? 'needs key' : isFreeTier ? 'free tier' : 'active'}
+            </span>
+          </div>
+          <button onClick={() => setShowKeyPanel(true)} className="text-yellow-400 hover:text-yellow-300 uppercase font-bold tracking-wider">
+            <span className="hidden sm:inline">API Keys</span>
+            <span className="sm:hidden">Keys</span>
+          </button>
+        </div>
+      </div>
 
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
         <section className={`flex flex-col gap-6 ${showHistory ? 'lg:col-span-8' : 'lg:col-span-12'} transition-all duration-300`}>
@@ -492,6 +521,19 @@ export default function App() {
         onLexiconChange={setIncludeLexicon}
         onFontChange={setExportFont}
         onGenerate={compileAndPrintPDF}
+      />
+
+      <ApiKeyPanel
+        show={showKeyPanel}
+        onClose={() => setShowKeyPanel(false)}
+        userOpenaiKey={userOpenaiKey}
+        onSave={saveUserKey}
+        onClear={clearUserKey}
+        usageCount={usageCount}
+        freeRemaining={freeRemaining}
+        isFreeTier={isFreeTier}
+        hasUserKey={hasUserKey}
+        freeLimit={FREE_LIMIT}
       />
 
       <footer className="border-t-2 border-neutral-900 bg-neutral-950 py-8">
