@@ -538,10 +538,13 @@ export default function App() {
 
       <footer className="border-t-2 border-neutral-900 bg-neutral-950 py-8">
         <div className="max-w-7xl mx-auto px-4 text-center space-y-2">
-          <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest font-mono">
-            Hermeneia / Russian–English translation and annotation for art, design, museum and archive research
+          <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest" style={{fontFamily: 'Poppins,sans-serif'}}>
+            Hermeneia &middot; Russian–English translation and annotation
           </p>
-          <p className="text-xs text-neutral-600 font-sans">
+          <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">
+            Powered by <a href="https://dotai.org" target="_blank" rel="noopener noreferrer" className="text-yellow-400 hover:text-yellow-300 transition-colors">dotai.org</a>
+          </p>
+          <p className="text-xs text-neutral-600 font-sans mt-1">
             Supporting high-fidelity, context-aware analysis of Central, South, and East Asian material archives, prints, manuscripts, and museological documentation.
           </p>
         </div>
