@@ -29,6 +29,7 @@ export async function getPageSourceData(pdfDocument, pageNum, ocrMode) {
   const viewport = page.getViewport({ scale: 1.5 });
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
+  if (!context) throw new Error('Canvas 2D context unavailable — cannot render PDF page.');
   canvas.height = viewport.height;
   canvas.width = viewport.width;
 
