@@ -50,7 +50,7 @@ export default function PageGrid({
                         : 'bg-transparent border-neutral-900 text-neutral-700 hover:text-neutral-500'
               }`}
             >
-              {p}
+              {String(p).padStart(3, '0')}
             </button>
           );
         })}

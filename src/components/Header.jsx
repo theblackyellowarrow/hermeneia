@@ -1,41 +1,28 @@
-import { Clock, Palette } from 'lucide-react';
-
 export default function Header({ inputMode, showHistory, history, onModeChange, onToggleHistory }) {
   return (
-    <header className="border-b-2 border-neutral-900 bg-black sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-        {/* Left: Logo + title + tagline */}
-        <div className="flex items-center space-x-4">
-          <div className="bg-yellow-400 p-2.5 rounded-none shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] flex items-center justify-center border border-black">
-            <Palette className="h-6 w-6 text-black" />
+    <header className="border-b border-neutral-900 bg-black sticky top-0 z-40">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-black tracking-tight text-white font-mono">Slovo</span>
+            <span className="text-[9px] text-neutral-600 uppercase tracking-[0.2em] font-mono mt-0.5">by</span>
+            <a href="https://dotai.org" target="_blank" rel="noopener noreferrer" className="text-[9px] text-cyan-400 hover:text-cyan-300 uppercase tracking-[0.2em] font-mono font-bold transition-colors">dotai</a>
           </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <h1 className="text-2xl font-black tracking-tight text-white uppercase" style={{fontFamily: 'Poppins,sans-serif'}}>Hermeneia</h1>
-                <span className="text-[10px] bg-yellow-400/10 text-yellow-400 px-2 py-0.5 rounded-none font-mono border border-yellow-400/20 uppercase font-bold">PROTOTYPE</span>
-              </div>
-              <p className="text-xs text-neutral-400 font-medium tracking-wide uppercase">
-                Russian–English Translation &amp; Annotation
-              </p>
-              <div className="flex items-center gap-1.5 mt-0.5">
-                <span className="text-[9px] text-neutral-600 uppercase tracking-widest">Powered by</span>
-                <a href="https://dotai.org" target="_blank" rel="noopener noreferrer" className="text-[9px] text-neutral-400 hover:text-yellow-400 font-bold uppercase tracking-wider transition-colors">dotai.org</a>
-              </div>
-            </div>
+          <span className="text-[7px] bg-cyan-400/10 text-cyan-400 px-2 py-0.5 rounded-none font-mono border border-cyan-400/20 uppercase tracking-[0.15em] hidden sm:inline">Russian–English Scholarly Translation Studio</span>
         </div>
-        {/* Right: Mode toggle + history */}
-        <div className="flex items-center space-x-3 font-sans">
-          <div className="bg-neutral-950 p-1 rounded-none flex items-center border border-neutral-900">
-            <button onClick={() => onModeChange('document')} className={`px-3 py-1.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all ${inputMode === 'document' ? 'bg-yellow-400 text-black font-black' : 'text-neutral-500 hover:text-white'}`}>
-              <span>Document Queue</span>
+
+        <div className="flex items-center gap-3">
+          <div className="bg-neutral-950 p-0.5 flex items-center border border-neutral-900">
+            <button onClick={() => onModeChange('document')} className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider transition-all ${inputMode === 'document' ? 'bg-cyan-400 text-black' : 'text-neutral-500 hover:text-neutral-300'}`}>
+              Archive Mode
             </button>
-            <button onClick={() => onModeChange('text')} className={`px-3 py-1.5 rounded-none text-xs font-bold uppercase tracking-wider transition-all ${inputMode === 'text' ? 'bg-yellow-400 text-black font-black' : 'text-neutral-500 hover:text-white'}`}>
-              <span>Text Module</span>
+            <button onClick={() => onModeChange('text')} className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider transition-all ${inputMode === 'text' ? 'bg-cyan-400 text-black' : 'text-neutral-500 hover:text-neutral-300'}`}>
+              Text Segment
             </button>
           </div>
-          <button onClick={onToggleHistory} className="p-2 text-neutral-400 hover:text-yellow-400 hover:bg-neutral-900 rounded-none border border-neutral-900 transition-colors relative" title="Recent Sessions">
-            <Clock className="h-5 w-5" />
-            {history.length > 0 && <span className="absolute top-1 right-1 h-1.5 w-2 bg-yellow-400 animate-pulse" />}
+          <button onClick={onToggleHistory} className="p-2 text-neutral-500 hover:text-cyan-400 hover:bg-neutral-900 transition-colors relative border border-neutral-900" title="Recent Sessions">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            {history.length > 0 && <span className="absolute top-1 right-1 h-1.5 w-2 bg-cyan-400" />}
           </button>
         </div>
       </div>

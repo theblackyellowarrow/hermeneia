@@ -374,25 +374,22 @@ export default function App() {
       />
 
       <div className="bg-neutral-950 border-b border-neutral-900">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between text-[10px] font-mono">
+        <div className="max-w-7xl mx-auto px-4 py-1.5 flex items-center justify-between text-[9px] font-mono">
           <div className="flex items-center gap-3">
             <span className="text-neutral-500 uppercase tracking-wider">
-              {isFreeTier ? `${freeRemaining} free pages left` : hasUserKey ? 'Your OpenAI key active' : 'Free tier exhausted'}
+              {isFreeTier ? `${freeRemaining} free pages` : hasUserKey ? 'own key' : 'tier exhausted'}
             </span>
-            <span className="text-neutral-700">|</span>
-            <span className="text-emerald-500 flex items-center gap-1">
-              <span className="h-1.5 w-1.5 bg-emerald-500" />
+            <span className="text-neutral-800">|</span>
+            <span className="text-emerald-500">
               DeepSeek free
             </span>
-            <span className="text-neutral-700">|</span>
-            <span className={`flex items-center gap-1 ${needsKey ? 'text-rose-500' : hasUserKey ? 'text-emerald-500' : 'text-yellow-400'}`}>
-              <span className={`h-1.5 w-1.5 ${needsKey ? 'bg-rose-500' : hasUserKey ? 'bg-emerald-500' : 'bg-yellow-400'}`} />
-              OpenAI {needsKey ? 'needs key' : isFreeTier ? 'free tier' : 'active'}
+            <span className="text-neutral-800">|</span>
+            <span className={needsKey ? 'text-rose-400' : hasUserKey ? 'text-emerald-500' : 'text-cyan-400'}>
+              OpenAI {needsKey ? 'locked' : isFreeTier ? 'free' : 'active'}
             </span>
           </div>
-          <button onClick={() => setShowKeyPanel(true)} className="text-yellow-400 hover:text-yellow-300 uppercase font-bold tracking-wider">
-            <span className="hidden sm:inline">API Keys</span>
-            <span className="sm:hidden">Keys</span>
+          <button onClick={() => setShowKeyPanel(true)} className="text-cyan-400 hover:text-cyan-300 uppercase tracking-wider font-bold">
+            Keys
           </button>
         </div>
       </div>
@@ -536,16 +533,10 @@ export default function App() {
         freeLimit={FREE_LIMIT}
       />
 
-      <footer className="border-t-2 border-neutral-900 bg-neutral-950 py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center space-y-2">
-          <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest" style={{fontFamily: 'Poppins,sans-serif'}}>
-            Hermeneia &middot; Russian–English translation and annotation
-          </p>
-          <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">
-            Powered by <a href="https://dotai.org" target="_blank" rel="noopener noreferrer" className="text-yellow-400 hover:text-yellow-300 transition-colors">dotai.org</a>
-          </p>
-          <p className="text-xs text-neutral-600 font-sans mt-1">
-            Supporting high-fidelity, context-aware analysis of Central, South, and East Asian material archives, prints, manuscripts, and museological documentation.
+      <footer className="border-t border-neutral-900 bg-neutral-950 py-6">
+        <div className="max-w-7xl mx-auto px-4 text-center space-y-1">
+          <p className="text-[9px] text-neutral-600 font-bold uppercase tracking-[0.2em] font-mono">
+            Slovo &middot; Russian–English Scholarly Translation Studio &middot; <a href="https://dotai.org" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 transition-colors">dotai.org</a>
           </p>
         </div>
       </footer>
