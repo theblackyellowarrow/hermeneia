@@ -18,8 +18,8 @@ export default function GlossaryPanel({ customGlossary, newGlossaryTerm, onNewTe
         <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-2 font-mono">Preset Curatorial Locks:</span>
         <div className="flex flex-wrap gap-1.5">
           {ART_HISTORY_PRESETS.map((preset, idx) => (
-            <button key={idx} type="button" onClick={() => onInsertPreset(preset)} className="text-[10px] bg-neutral-900 hover:bg-yellow-400 border border-neutral-800 text-neutral-400 hover:text-black px-2.5 py-1 transition-all flex items-center gap-1 cursor-pointer font-bold uppercase tracking-wider">
-              <span>+ {preset.word}</span>
+            <button key={idx} type="button" onClick={() => onInsertPreset(preset)} className="text-[10px] bg-neutral-900 hover:bg-cyan-400 border border-neutral-800 text-neutral-400 hover:text-black px-2.5 py-1 transition-all flex items-center gap-1 cursor-pointer font-bold tracking-wider">
+              <span>+ {preset.meaning}</span>
             </button>
           ))}
         </div>
