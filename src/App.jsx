@@ -362,14 +362,16 @@ export default function App() {
   };
   const handleClearCopiedAndPage = (pageNum) => { setIsCopied(false); setCurrentPageIndex(pageNum); };
   const handleLandingPasteText = () => { setInputMode('text'); };
+  const handleEnterSlovo = () => setInputMode('document');
 
-  const showLanding = !uploadedFile && !sourceText.trim() && Object.keys(translatedPages).length === 0;
+  const showLanding = !uploadedFile && !sourceText.trim() && Object.keys(translatedPages).length === 0 && inputMode === 'document';
 
   if (showLanding) {
     return (
       <LandingScreen
         onFileChange={handleFileChange}
         onPasteText={handleLandingPasteText}
+        onEnter={handleEnterSlovo}
         fileInputRef={fileInputRef}
       />
     );
