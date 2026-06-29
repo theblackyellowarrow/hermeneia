@@ -56,6 +56,7 @@ export default function App() {
   const [history, setHistory] = useState([]);
   const [error, setError] = useState(null);
   const [activeWorkerCount, setActiveWorkerCount] = useState(0);
+  const [hasEntered, setHasEntered] = useState(false);
 
   const queuePagesRef = useRef([]);
   const activeWorkersCountRef = useRef(0);
@@ -116,6 +117,7 @@ export default function App() {
     queuePagesRef.current = [];
     activeWorkersCountRef.current = 0;
     setActiveWorkerCount(0);
+    setHasEntered(false);
   };
 
   const handleFileChange = (file) => {
@@ -361,16 +363,14 @@ export default function App() {
     setTimeout(() => setIsCopied(false), 2000);
   };
   const handleClearCopiedAndPage = (pageNum) => { setIsCopied(false); setCurrentPageIndex(pageNum); };
-  const handleLandingPasteText = () => { setInputMode('text'); };
-  const handleEnterSlovo = () => setInputMode('document');
+  const handleEnterSlovo = () => setHasEntered(true);
 
-  const showLanding = !uploadedFile && !sourceText.trim() && Object.keys(translatedPages).length === 0 && inputMode === 'document';
+  const showLanding = !hasEntered && !uploadedFile && !sourceText.trim() && Object.keys(translatedPages).length === 0;
 
   if (showLanding) {
     return (
       <LandingScreen
         onFileChange={handleFileChange}
-        onPasteText={handleLandingPasteText}
         onEnter={handleEnterSlovo}
         fileInputRef={fileInputRef}
       />
