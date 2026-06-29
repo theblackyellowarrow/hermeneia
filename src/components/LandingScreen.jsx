@@ -27,19 +27,9 @@ export default function LandingScreen({ onFileChange, onPasteText, onEnter, file
           <p className="text-sm text-neutral-400 leading-relaxed font-sans max-w-md mx-auto mb-10">
             Translate archive scans, catalogues, museum texts and academic pages with glossary control, citation detection, and publication-ready export.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <button onClick={() => fileInputRef.current?.click()} className="w-full sm:w-auto px-8 py-3.5 bg-cyan-400 hover:bg-cyan-300 text-black font-bold text-xs uppercase tracking-[0.1em] transition-all font-mono">
-              Load Russian Document
-            </button>
-            <button onClick={onPasteText} className="w-full sm:w-auto px-8 py-3.5 bg-transparent text-neutral-400 hover:text-white border border-neutral-800 hover:border-neutral-600 font-bold text-xs uppercase tracking-[0.1em] transition-all font-mono">
-              Paste Text Segment
-            </button>
-          </div>
-          <div className="mt-8">
-            <button onClick={onEnter} className="text-xs text-neutral-600 hover:text-cyan-400 uppercase tracking-[0.15em] font-mono transition-colors">
-              Enter Slovo without a document →
-            </button>
-          </div>
+          <button onClick={onEnter} className="px-8 py-3.5 bg-cyan-400 hover:bg-cyan-300 text-black font-bold text-xs uppercase tracking-[0.1em] transition-all font-mono">
+            Enter Slovo
+          </button>
           <div className="mt-10 flex items-center justify-center gap-6 text-[10px] text-neutral-500 uppercase tracking-[0.15em] font-mono">
             <span className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 bg-emerald-500" />
