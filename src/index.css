@@ -22,17 +22,17 @@
   --color-neutral-800: #242424;
   --color-neutral-900: #1a1a1a;
   --color-neutral-950: #080808;
-  --color-yellow-50: #e6faf9;
-  --color-yellow-100: #b3f2ee;
-  --color-yellow-200: #80e9e3;
-  --color-yellow-300: #4de0d8;
-  --color-yellow-400: #00d8cf;
-  --color-yellow-500: #00c2ba;
-  --color-yellow-600: #00a8a1;
-  --color-yellow-700: #008e88;
-  --color-yellow-800: #007570;
-  --color-yellow-900: #005c58;
-  --color-yellow-950: #003835;
+  --color-yellow-50: #e6fdfd;
+  --color-yellow-100: #b3fafa;
+  --color-yellow-200: #80f7f8;
+  --color-yellow-300: #4df4f6;
+  --color-yellow-400: #18F3F5;
+  --color-yellow-500: #14dadd;
+  --color-yellow-600: #10c0c4;
+  --color-yellow-700: #0da6aa;
+  --color-yellow-800: #098c90;
+  --color-yellow-900: #067276;
+  --color-yellow-950: #034e52;
   --color-emerald-50: #e8faf0;
   --color-emerald-100: #bcf0d1;
   --color-emerald-200: #8de6b0;
@@ -44,18 +44,20 @@
   --color-emerald-800: #17603b;
   --color-emerald-900: #0e4328;
   --color-emerald-950: #072616;
-  --color-rose-50: #ffe5e9;
-  --color-rose-100: #ffb3bf;
-  --color-rose-200: #ff8095;
-  --color-rose-300: #ff4d6b;
-  --color-rose-400: #ff4d64;
-  --color-rose-500: #e6364d;
-  --color-rose-600: #c41f35;
-  --color-rose-700: #a21a2c;
-  --color-rose-800: #801423;
-  --color-rose-900: #5e0f1a;
-  --color-rose-950: #3d0a11;
-  --color-blue-400: #12fff3;
+  --color-rose-50: #ffe9e6;
+  --color-rose-100: #ffc2b5;
+  --color-rose-200: #ff9b84;
+  --color-rose-300: #ff7453;
+  --color-rose-400: #FF3B1F;
+  --color-rose-500: #e6331a;
+  --color-rose-600: #c42a14;
+  --color-rose-700: #a2220f;
+  --color-rose-800: #80190a;
+  --color-rose-900: #5e1105;
+  --color-rose-950: #3d0900;
+  --color-blue-400: #18F3F5;
+  --color-orange-400: #FF8A00;
+  --color-orange-500: #e67a00;
   --animate-fade-in: fadeIn 0.2s ease-out;
   --animate-slide-left: slideLeft 0.3s ease-out;
   --font-sans: "Inter", "Helvetica Neue", "Arial", sans-serif;
@@ -84,7 +86,7 @@ body {
 }
 
 *:focus-visible {
-  outline: 2px solid var(--color-yellow-400);
+  outline: 2px solid #18F3F5;
   outline-offset: 2px;
 }
 
