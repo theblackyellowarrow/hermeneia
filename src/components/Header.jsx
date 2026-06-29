@@ -1,14 +1,10 @@
-export default function Header({ inputMode, showHistory, history, onModeChange, onToggleHistory }) {
+export default function Header({ inputMode, showHistory, history, onModeChange, onToggleHistory, onHome }) {
   return (
     <header className="border-b border-neutral-900 bg-black sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl font-black tracking-tight text-white font-mono">Slovo</span>
-            <span className="text-[9px] text-neutral-600 uppercase tracking-[0.2em] font-mono mt-0.5">by</span>
-            <a href="https://dotai.org" target="_blank" rel="noopener noreferrer" className="text-[9px] text-cyan-400 hover:text-cyan-300 tracking-[0.2em] font-mono font-bold transition-colors lowercase">dotai</a>
-          </div>
-          <span className="text-[7px] bg-cyan-400/10 text-cyan-400 px-2 py-0.5 rounded-none font-mono border border-cyan-400/20 uppercase tracking-[0.15em] hidden sm:inline">Russian–English Scholarly Translation Studio</span>
+          <button onClick={onHome} className="text-lg font-black tracking-tight text-white font-mono hover:text-[#18F3F5] transition-colors lowercase">dotai</button>
+          <span className="text-[7px] bg-cyan-400/10 text-cyan-400 px-2 py-0.5 rounded-none font-mono border border-cyan-400/20 uppercase tracking-[0.15em] hidden sm:inline">Slovo</span>
         </div>
 
         <div className="flex items-center gap-3">

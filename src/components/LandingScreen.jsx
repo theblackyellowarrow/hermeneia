@@ -12,11 +12,7 @@ export default function LandingScreen({ onFileChange, onPasteText, onEnter, file
         </div>
 
         <div className="absolute top-0 left-0 right-0 p-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-lg font-black tracking-tight text-white font-mono">Slovo</span>
-            <span className="text-[9px] text-neutral-600 tracking-[0.2em] font-mono">by</span>
-            <a href="https://dotai.org" target="_blank" rel="noopener noreferrer" className="text-[9px] text-cyan-400 hover:text-cyan-300 tracking-[0.2em] font-mono font-bold transition-colors lowercase">dotai</a>
-          </div>
+          <a href="https://dotai.org" target="_blank" rel="noopener noreferrer" className="text-lg font-black tracking-tight text-white font-mono hover:text-[#18F3F5] transition-colors lowercase">dotai</a>
         </div>
 
         <div className="text-center z-10 px-4 max-w-lg">

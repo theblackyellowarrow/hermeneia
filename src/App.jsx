@@ -387,6 +387,7 @@ export default function App() {
         history={history}
         onModeChange={(mode) => { setInputMode(mode); clearCurrentWorkspace(); setError(null); }}
         onToggleHistory={() => setShowHistory(!showHistory)}
+        onHome={() => { clearCurrentWorkspace(); setHasEntered(false); }}
       />
 
       <div className="bg-neutral-950 border-b border-neutral-900">
