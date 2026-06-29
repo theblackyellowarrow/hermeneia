@@ -9,6 +9,7 @@ import GlossaryPanel from './components/GlossaryPanel';
 import HistorySidebar from './components/HistorySidebar';
 import ExportModal from './components/ExportModal';
 import ApiKeyPanel from './components/ApiKeyPanel';
+import LandingScreen from './components/LandingScreen';
 import { useDocumentSource, useDragDrop } from './hooks/useDocumentSource';
 import { useAnnotations } from './hooks/useAnnotations';
 import { useApiKeys } from './hooks/useApiKeys';
@@ -360,9 +361,22 @@ export default function App() {
     setTimeout(() => setIsCopied(false), 2000);
   };
   const handleClearCopiedAndPage = (pageNum) => { setIsCopied(false); setCurrentPageIndex(pageNum); };
+  const handleLandingPasteText = () => { setInputMode('text'); };
+
+  const showLanding = !uploadedFile && !sourceText.trim() && Object.keys(translatedPages).length === 0;
+
+  if (showLanding) {
+    return (
+      <LandingScreen
+        onFileChange={handleFileChange}
+        onPasteText={handleLandingPasteText}
+        fileInputRef={fileInputRef}
+      />
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-black text-slate-100 font-sans flex flex-col selection:bg-yellow-400 selection:text-black">
+    <div className="min-h-screen bg-black text-slate-100 font-sans flex flex-col selection:bg-cyan-400 selection:text-black">
       <input type="file" ref={fileInputRef} onChange={(e) => handleFileChange(e.target.files?.[0])} accept=".pdf, image/*" className="hidden" />
 
       <Header
